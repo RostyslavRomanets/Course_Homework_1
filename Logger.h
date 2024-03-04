@@ -27,7 +27,7 @@ private:
         if (!logFile)
             throw std::runtime_error("Can not open log file.");
 
-        auto logTime = std::format("{0:%F %T}", std::chrono::system_clock::now());
+        auto logTime = std::format("{0:%F %T}", std::chrono::current_zone()->to_local(std::chrono::system_clock::now()));
         logFile << logTime << " | " << text << "\n";
         logFile.close();
     }

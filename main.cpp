@@ -2,8 +2,6 @@
 #include "ConsoleWrapper.h"
 #include "Logger.h"
 
-#include <thread>
-
 int main() {
     try
     {
