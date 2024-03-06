@@ -24,18 +24,24 @@ public:
     }
 
     void CursorEnteredWindow() override {
-        SetConsoleTextAttribute(m_console, kHighlightColor);
+        if (!SetConsoleTextAttribute(m_console, kHighlightColor))
+            throw std::runtime_error("Can not change text color");
+
         UpdateText();
     }
 
     void CursorLeavedWindow() override {
-        SetConsoleTextAttribute(m_console, kDefaultColor);
+        if (!SetConsoleTextAttribute(m_console, kDefaultColor))
+            throw std::runtime_error("Can not change text color");
+
         UpdateText();
     }
 
 private:
     void UpdateText() {
-        SetConsoleCursorPosition(m_console, {0, 0});
+        if (!SetConsoleCursorPosition(m_console, {0, 0}))
+            throw std::runtime_error("Can not change cursor position");
+
         std::cout << m_text;
     }
 };
