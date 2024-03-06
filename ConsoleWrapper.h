@@ -24,16 +24,12 @@ public:
     }
 
     void CursorEnteredWindow() override {
-        if (!SetConsoleTextAttribute(m_console, kHighlightColor))
-            throw std::runtime_error("Can not change text color");
-
+        ChangeTextColor(kHighlightColor);
         UpdateText();
     }
 
     void CursorLeavedWindow() override {
-        if (!SetConsoleTextAttribute(m_console, kDefaultColor))
-            throw std::runtime_error("Can not change text color");
-
+        ChangeTextColor(kDefaultColor);
         UpdateText();
     }
 
@@ -43,6 +39,11 @@ private:
             throw std::runtime_error("Can not change cursor position");
 
         std::cout << m_text;
+    }
+
+    void ChangeTextColor(int color) {
+        if (!SetConsoleTextAttribute(m_console, color))
+            throw std::runtime_error("Can not change text color");
     }
 };
 
